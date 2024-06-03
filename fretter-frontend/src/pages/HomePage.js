@@ -1,6 +1,6 @@
 import React from 'react';
-import { Dropdown, Label, Root, Text } from '../components';
-import { MainFretboard } from '../containers';
+import { Content, Dropdown, Label, Root, Text } from '../components';
+import { MainFretboard, Navigation } from '../containers';
 import { useNotesQuery, useScalesQuery, useTuningQuery } from '../hooks/useQueryHooks';
 
 const HomePage = () => {
@@ -48,41 +48,43 @@ const HomePage = () => {
 
     return (
         <Root>
-            <Text largeHeader style={{marginTop: -150, paddingBottom: 150}}>Fretter</Text>
-            <span>
-                <Label label={'Key'} >
-                    <Dropdown
-                        value={noteValue}
-                        labelFormatter={noteLabelFormatter}
-                        setValue={(e) => setNoteValue(e.target.value)}
-                        options={noteOptions}
-                    />
-                </Label>
-            </span>
-            <br />
-            <span>
-                <Label label={'Scale'} >
-                    <Dropdown
-                        value={scaleValue}
-                        setValue={(e) => setScaleValue(e.target.value)}
-                        options={scaleOptions}
-                        style={{ minWidth: 200 }}
-                    />
-                </Label>
-            </span>
-            <br />
-            <span>
-                <Label label={'Tuning'} >
-                    <Dropdown
-                        value={tuningValue}
-                        setValue={(e) => setTuningValue(e.target.value)}
-                        options={tuningOptions}
-                        style={{ minWidth: 200 }}
-                    />
-                </Label>
-            </span>
-            <br />
-            <MainFretboard scale={scaleValue} scaleKey={noteOptions[noteValue-1]} guitarTuning={tuningValue} />
+            <Navigation />
+            <Content>
+                <span>
+                    <Label label={'Key'} >
+                        <Dropdown
+                            value={noteValue}
+                            labelFormatter={noteLabelFormatter}
+                            setValue={(e) => setNoteValue(e.target.value)}
+                            options={noteOptions}
+                        />
+                    </Label>
+                </span>
+                <br />
+                <span>
+                    <Label label={'Scale'} >
+                        <Dropdown
+                            value={scaleValue}
+                            setValue={(e) => setScaleValue(e.target.value)}
+                            options={scaleOptions}
+                            style={{ minWidth: 200 }}
+                        />
+                    </Label>
+                </span>
+                <br />
+                <span>
+                    <Label label={'Tuning'} >
+                        <Dropdown
+                            value={tuningValue}
+                            setValue={(e) => setTuningValue(e.target.value)}
+                            options={tuningOptions}
+                            style={{ minWidth: 200 }}
+                        />
+                    </Label>
+                </span>
+                <br />
+                <MainFretboard scale={scaleValue} scaleKey={noteOptions[noteValue-1]} guitarTuning={tuningValue} />
+            </Content>
         </Root>
     )
 }
